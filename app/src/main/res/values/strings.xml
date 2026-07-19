@@ -1,3 +1,26 @@
 <resources>
     <string name="app_name">CoolblueProductSearch</string>
+    <string name="search_hint">What are you looking for?</string>
+    <string name="recommended_for_you">Recommended for you</string>
+    <plurals name="found_results">
+        <item quantity="one">Found %1$d result</item>
+        <item quantity="other">Found %1$d results</item>
+    </plurals>
+
+    <!-- Product Details -->
+    <string name="next_day_delivery">Next day delivery</string>
+    <string name="rating_value">⭐ %1$.1f</string>
+
+    <!-- Reviews handled by plurals for correct grammar -->
+    <plurals name="review_count">
+        <item quantity="one">(%1$d review)</item>
+        <item quantity="other">(%1$d reviews)</item>
+    </plurals>
+
+    <!-- State Messages -->
+    <string name="idle_message">Start typing to find the best products at Coolblue!</string>
+    <string name="empty_message">We could not find anything for \"%1$s\".\nTry a different search term.</string>
+    <string name="error_message">An error occurred while searching.</string>
+    <string name="connection_error">Connection error. Please try again.</string>
+
 </resources>
