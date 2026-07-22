@@ -1,0 +1,43 @@
+# Coolblue Product Search Assignment
+
+A modern Android application built as part of the Coolblue technical assignment. The app allows users to search for products using a mocked data source, following clean architecture and best practices.
+
+## 🚀 Getting Started
+
+1.  Clone the repository.
+2.  Open in **Android Studio Ladybug (or newer)**.
+3.  Sync Gradle and run the `:app` module.
+4.  **Tests**: Right-click the `src/test` or `src/androidTest` folders and select "Run all tests".
+
+## 🏗 Architecture
+
+The project follows **Clean Architecture** principles to ensure separation of concerns, testability, and maintainability:
+
+-   **Domain Layer**: Contains pure Kotlin entities (`Product`) and repository interfaces. This layer is independent of any framework.
+-   **Data Layer**: Handles data retrieval from the local `assets/products.json`, parsing with `Kotlinx.Serialization`, and mapping DTOs to Domain models.
+-   **Presentation Layer**: Implements the **MVVM** pattern using **Jetpack Compose**. It uses **Unidirectional Data Flow** where the ViewModel exposes a single `UiState` via a `StateFlow`.
+
+## ✨ Key Features & Technical Choices
+
+-   **Search Debouncing**: To optimize performance, the search triggers only after the user stops typing for 300ms (using Coroutines `debounce`).
+-   **Discovery-First UI**: The app displays all products by default on launch to improve user engagement, switching to filtered results as the user types.
+-   **Branded Experience**:
+    - Implemented a custom `1.279,-` price formatting logic to match the brand's style.
+-   **Robust State Management**: Used a sealed interface (`SearchUiState`) to explicitly handle `Loading`, `Success`, `Empty`, and `Error` states.
+-   **Localization**: All strings are externalized in `strings.xml`. Used `<plurals>` to correctly handle "1 result" vs "2 results" grammar.
+-   **Simulated Latency**: Added a 500ms delay in the repository to demonstrate proper handling of asynchronous UI states and loading indicators.
+
+## 🛠 Tech Stack
+
+-   **Language**: Kotlin
+-   **UI**: Jetpack Compose (Material 3)
+-   **Asynchronous Logic**: Coroutines & Flow
+-   **Image Loading**: Coil
+-   **Serialization**: Kotlinx.Serialization
+-   **Dependency Injection**: Manual DI instead of Hilt because of project size.
+
+## 🧪 Testing
+
+Testing was a priority to ensure the reliability of business logic and UI:
+-   **Unit Tests**: Verified the `ProductMapper` (price formatting logic) and the `SearchViewModel` (state transitions and search logic).
+-   **UI Tests**: Added a Compose Instrumentation test to verify the app launches and displays core UI components correctly.
