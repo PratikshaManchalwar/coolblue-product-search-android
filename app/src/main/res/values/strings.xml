@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">CoolblueProductSearch</string>
     <string name="search_hint">What are you looking for?</string>
+    <string name="search_icon">Search icon</string>
+    <string name="product_image_description">Product image of %1$s</string>
     <string name="recommended_for_you">Recommended for you</string>
+    <string name="clear_search">Clear</string>
     <plurals name="found_results">
         <item quantity="one">Found %1$d result</item>
         <item quantity="other">Found %1$d results</item>
