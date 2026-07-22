@@ -34,8 +34,14 @@ class ProductRepositoryImpl(
             val filteredProducts = if (query.isBlank()) {
                 allProducts
             } else {
-                allProducts.filter {
-                    it.productName.contains(query, ignoreCase = true)
+                allProducts.filter { product ->
+                    val matchesName = product.productName.contains(query, ignoreCase = true)
+
+                    val matchesUsps = product.USPs?.any { usp ->
+                        usp.contains(query, ignoreCase = true)
+                    } == true
+
+                    matchesName || matchesUsps
                 }
             }
 
