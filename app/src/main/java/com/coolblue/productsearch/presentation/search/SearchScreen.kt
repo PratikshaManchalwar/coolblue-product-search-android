@@ -15,9 +15,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -25,6 +22,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.coolblue.productsearch.R
 import com.coolblue.productsearch.domain.model.Product
 import com.coolblue.productsearch.presentation.search.components.ProductItem
@@ -35,16 +33,15 @@ import com.coolblue.productsearch.ui.theme.ProductSearchTheme
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchScreen(viewModel: SearchViewModel) {
-    val uiState by viewModel.uiState.collectAsState()
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val context = LocalContext.current
-    var localQuery by remember { mutableStateOf("") }
+    val query by viewModel.searchQuery.collectAsState()
 
     Scaffold(
         topBar = {
             SearchHeader(
-                query = localQuery,
+                query = query,
                 onQueryChange = { newQuery ->
-                    localQuery = newQuery
                     viewModel.onSearchQueryChanged(newQuery)
                 }
             )
@@ -70,7 +67,7 @@ fun SearchScreen(viewModel: SearchViewModel) {
                         contentPadding = PaddingValues(bottom = Dimens.SpacingMedium)
                     ) {
                         item {
-                            val headerText = if (localQuery.isEmpty()) {
+                            val headerText = if (query.isEmpty()) {
                                 stringResource(R.string.recommended_for_you)
                             } else {
                                 context.resources.getQuantityString(
@@ -94,7 +91,7 @@ fun SearchScreen(viewModel: SearchViewModel) {
                     }
                 }
                 is SearchUiState.Empty -> {
-                    InfoMessage(stringResource(R.string.empty_message, localQuery))
+                    InfoMessage(stringResource(R.string.empty_message, query))
                 }
                 is SearchUiState.Error -> {
                     InfoMessage(text = stringResource(R.string.connection_error), isError = true)

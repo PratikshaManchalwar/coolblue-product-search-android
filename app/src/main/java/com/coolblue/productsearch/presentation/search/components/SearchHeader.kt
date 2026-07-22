@@ -68,7 +68,6 @@ fun SearchHeader(
                     if (query.isNotEmpty()) {
                         IconButton(onClick = {
                             onQueryChange("")
-                            focusManager.clearFocus()
                         }) {
                             Icon(
                                 Icons.Default.Close,

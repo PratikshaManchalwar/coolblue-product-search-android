@@ -25,6 +25,7 @@ The project follows **Clean Architecture** principles to ensure separation of co
     - Implemented a custom `1.279,-` price formatting logic to match the brand's style.
 -   **Robust State Management**: Used a sealed interface (`SearchUiState`) to explicitly handle `Loading`, `Success`, `Empty`, and `Error` states.
 -   **Localization**: All strings are externalized in `strings.xml`. Used `<plurals>` to correctly handle "1 result" vs "2 results" grammar.
+-   **Simulated Latency**: Added a 500ms delay in the repository to demonstrate proper handling of asynchronous UI states and loading indicators.
 
 ## 🛠 Tech Stack
 
@@ -33,7 +34,7 @@ The project follows **Clean Architecture** principles to ensure separation of co
 -   **Asynchronous Logic**: Coroutines & Flow
 -   **Image Loading**: Coil
 -   **Serialization**: Kotlinx.Serialization
--   **Dependency Injection**: Manual injection in `MainActivity` (chosen for simplicity in a 2-hour scope).
+-   **Dependency Injection**: Manual DI instead of Hilt because of project size.
 
 ## 🧪 Testing
 

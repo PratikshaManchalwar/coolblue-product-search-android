@@ -29,7 +29,7 @@ class ProductRepositoryImpl(
     }
     override suspend fun searchProducts(query: String): Result<List<Product>> = withContext(Dispatchers.IO) {
         try {
-            delay(800)
+            delay(500)
 
             val allProducts = getRawProducts()
 

@@ -17,6 +17,7 @@ class SearchViewModel(
     val uiState: StateFlow<SearchUiState> = _uiState.asStateFlow()
 
     private val _searchQuery = MutableStateFlow("")
+    val searchQuery: StateFlow<String> = _searchQuery.asStateFlow()
 
     init {
         observeSearchQuery()
