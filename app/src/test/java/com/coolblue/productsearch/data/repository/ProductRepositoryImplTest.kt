@@ -55,7 +55,7 @@ class ProductRepositoryImplTest {
         every { context.assets } returns assetManager
         every { assetManager.open("products.json") } returns ByteArrayInputStream(mockJson.toByteArray())
 
-        repository = ProductRepositoryImpl(context)
+        repository = ProductRepositoryImpl(assetManager)
     }
 
     @Test

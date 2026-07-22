@@ -1,6 +1,5 @@
 package com.coolblue.productsearch.data.repository
 
-import android.content.Context
 import com.coolblue.productsearch.data.mapper.toDomain
 import com.coolblue.productsearch.data.model.ProductDto
 import com.coolblue.productsearch.data.model.SearchResponseDto
@@ -12,15 +11,14 @@ import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
 
 class ProductRepositoryImpl(
-    private val context: Context,
+    private val assetManager: android.content.res.AssetManager,
     private val json: Json = Json { ignoreUnknownKeys = true }
 ) : ProductRepository {
-
     private var cachedProducts: List<ProductDto>? = null
 
     private suspend fun getRawProducts(): List<ProductDto> = withContext(Dispatchers.IO) {
         cachedProducts ?: run {
-            val jsonString = context.assets.open("products.json").bufferedReader().use { it.readText() }
+            val jsonString = assetManager.open("products.json").bufferedReader().use { it.readText() }
             val responseDto = json.decodeFromString<SearchResponseDto>(jsonString)
             responseDto.products.also {
                 cachedProducts = it
